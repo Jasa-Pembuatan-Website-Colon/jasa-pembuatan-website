@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { FAQS, fadeUp, stagger } from "@/lib/constants";
 
@@ -12,7 +12,7 @@ export default function FaqSection() {
   return (
     <section id="faq" className="border-t border-white/[0.06] px-6 py-28">
       <div className="mx-auto max-w-3xl">
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -25,16 +25,16 @@ export default function FaqSection() {
           <h2 className="text-3xl font-semibold tracking-tight text-zinc-100 sm:text-4xl">
             Pertanyaan yang sering ditanyakan.
           </h2>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
           variants={stagger}
         >
           {FAQS.map((item, i) => (
-            <motion.div
+            <m.div
               key={i}
               variants={fadeUp}
               className="border-b border-white/[0.08]"
@@ -46,18 +46,18 @@ export default function FaqSection() {
                 <span className="pr-8 text-sm font-semibold text-zinc-200">
                   {item.q}
                 </span>
-                <motion.span
+                <m.span
                   animate={{ rotate: openFaq === i ? 180 : 0 }}
                   transition={{ duration: 0.2 }}
                   className="shrink-0"
                 >
                   <ChevronDown className="h-4 w-4 text-zinc-500" />
-                </motion.span>
+                </m.span>
               </button>
 
               <AnimatePresence initial={false}>
                 {openFaq === i && (
-                  <motion.div
+                  <m.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
@@ -67,12 +67,12 @@ export default function FaqSection() {
                     <p className="pb-5 text-sm leading-relaxed text-zinc-500">
                       {item.a}
                     </p>
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </m.div>
           ))}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

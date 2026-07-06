@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Check } from "lucide-react";
 import { PLANS, fadeUp, stagger } from "@/lib/constants";
 
@@ -8,7 +8,7 @@ export default function PricingSection() {
   return (
     <section id="pricing" className="border-t border-white/[0.06] px-6 py-28">
       <div className="mx-auto max-w-6xl">
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -27,9 +27,9 @@ export default function PricingSection() {
             Semua paket sudah termasuk konsultasi kebutuhan, desain responsif,
             dan handover teknis setelah website live.
           </p>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
@@ -37,7 +37,7 @@ export default function PricingSection() {
           className="grid grid-cols-1 gap-4 md:grid-cols-3"
         >
           {PLANS.map((plan) => (
-            <motion.div
+            <m.div
               key={plan.name}
               variants={fadeUp}
               className={`relative rounded-lg border p-7 transition-all duration-200 hover:-translate-y-1 ${
@@ -85,9 +85,9 @@ export default function PricingSection() {
               >
                 Pilih Paket
               </a>
-            </motion.div>
+            </m.div>
           ))}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

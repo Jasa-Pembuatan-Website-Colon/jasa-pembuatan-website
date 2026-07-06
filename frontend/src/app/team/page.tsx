@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Image from "next/image";
 import Lightfall from "@/components/Lightfall";
 import Navbar from "@/components/sections/Navbar";
@@ -120,7 +120,7 @@ export default function TeamPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(9,9,11,0.18),rgba(9,9,11,0.78)_62%,#09090b_100%)]" />
         <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-b from-transparent to-zinc-950" />
 
-        <motion.div
+        <m.div
           initial="hidden"
           animate="visible"
           variants={fadeUp}
@@ -133,7 +133,7 @@ export default function TeamPage() {
           </div>
 
           <h1 className="text-balance text-4xl font-semibold tracking-tight text-zinc-100 sm:text-5xl lg:text-6xl">
-            Tim teknis yang fokus pada hasil bisnis, bukan sekadar tampilan.
+            Tim teknis yang focus pada hasil bisnis, bukan sekadar tampilan.
           </h1>
 
           <p className="mx-auto mt-7 max-w-2xl text-base leading-7 text-zinc-500 sm:text-lg">
@@ -141,12 +141,12 @@ export default function TeamPage() {
             website Anda terlihat profesional, cepat dipakai, dan mudah
             dikembangkan.
           </p>
-        </motion.div>
+        </m.div>
       </section>
 
       <section className="relative z-10 px-6 pb-24">
         <div className="relative z-10 mx-auto max-w-6xl">
-          <motion.div
+          <m.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.35 }}
@@ -164,11 +164,11 @@ export default function TeamPage() {
             </div>
             <p className="max-w-md text-sm leading-6 text-zinc-500">
               Struktur tim kami dibuat ramping agar komunikasi cepat, scope
-              jelas, dan setiap detail project punya pemilik.
+              jelas, and setiap detail project punya pemilik.
             </p>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.18 }}
@@ -178,12 +178,12 @@ export default function TeamPage() {
             {teamMembers.map((member) => (
               <TeamCard key={member.name} member={member} />
             ))}
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
       <section className="relative z-10 px-6 pb-24">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
@@ -203,7 +203,7 @@ export default function TeamPage() {
               <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
-        </motion.div>
+        </m.div>
       </section>
 
       <Footer />
@@ -213,7 +213,7 @@ export default function TeamPage() {
 
 function TeamCard({ member }: { member: TeamMember }) {
   return (
-    <motion.article
+    <m.article
       variants={fadeUp}
       transition={{ duration: 0.45, ease: "easeOut" }}
       className={`group relative overflow-hidden rounded-lg border border-white/[0.08] bg-white/[0.025] shadow-2xl shadow-black/25 backdrop-blur-xl ${member.className ?? ""}`}
@@ -243,6 +243,6 @@ function TeamCard({ member }: { member: TeamMember }) {
         </h3>
         <p className="mt-3 text-sm leading-6 text-zinc-400">{member.title}</p>
       </div>
-    </motion.article>
+    </m.article>
   );
 }

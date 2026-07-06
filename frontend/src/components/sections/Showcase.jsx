@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { fadeUp } from "@/lib/constants";
 
 // Lazy load MacbookScroll - heavy animation component
@@ -14,7 +14,7 @@ export default function ShowcaseSection() {
   return (
     <section id="showcase" className="relative overflow-hidden">
       <div className="mx-auto max-w-6xl px-6 pt-32 pb-8 text-center">
-        <motion.h2
+        <m.h2
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.4 }}
@@ -24,7 +24,7 @@ export default function ShowcaseSection() {
           Dibangun dengan Teknologi Modern.
           <br />
           <span className="text-zinc-500">Performa Tanpa Batas.</span>
-        </motion.h2>
+        </m.h2>
       </div>
 
       <MacbookScroll

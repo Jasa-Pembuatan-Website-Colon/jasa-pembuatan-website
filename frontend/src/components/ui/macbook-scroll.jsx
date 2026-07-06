@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m, useScroll, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
 import {
   Sun,
@@ -52,7 +52,7 @@ export const MacbookScroll = ({ src, showGradient, title, badge }) => {
       className="flex min-h-[200vh] shrink-0 scale-[0.35] transform flex-col items-center justify-start py-0 [perspective:800px] sm:scale-50 md:scale-100 md:py-80"
     >
       {/* Judul yang fade-out saat scroll */}
-      <motion.h2
+      <m.h2
         style={{ translateY: textTransform, opacity: textOpacity }}
         className="mb-20 text-center text-3xl font-bold text-white"
       >
@@ -61,7 +61,7 @@ export const MacbookScroll = ({ src, showGradient, title, badge }) => {
             Website Impian Anda, <br /> Kami Yang Bangun.
           </span>
         )}
-      </motion.h2>
+      </m.h2>
 
       {/* Layar MacBook (Lid) */}
       <Lid src={src} scaleX={scaleX} scaleY={scaleY} rotate={rotate} translate={translate} />
@@ -117,7 +117,7 @@ export const Lid = ({ scaleX, scaleY, rotate, translate, src }) => {
         </div>
       </div>
       {/* Layar utama yang terbuka */}
-      <motion.div
+      <m.div
         style={{
           scaleX: scaleX,
           scaleY: scaleY,
@@ -138,7 +138,7 @@ export const Lid = ({ scaleX, scaleY, rotate, translate, src }) => {
             className="absolute inset-0 h-full w-full rounded-lg object-cover object-left-top"
           />
         )}
-      </motion.div>
+      </m.div>
     </div>
   );
 };

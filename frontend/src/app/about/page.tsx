@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { m, type Variants } from "framer-motion";
 import { ArrowUpRight, Crosshair, Gem, Layers3, ShieldCheck, Sparkles } from "lucide-react";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
@@ -49,7 +49,7 @@ export default function AboutPage() {
 
       <section className="relative px-6 pb-20 pt-32 lg:pt-40">
         <div className="mx-auto max-w-6xl">
-          <motion.div
+          <m.div
             initial="hidden"
             animate="visible"
             variants={{
@@ -58,24 +58,24 @@ export default function AboutPage() {
             }}
             className="max-w-5xl"
           >
-            <motion.p
+            <m.p
               variants={fadeUp}
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-zinc-400"
             >
               <Gem className="h-3.5 w-3.5 text-cyan-300" />
               About ThreeDevs
-            </motion.p>
+            </m.p>
 
-            <motion.h1
+            <m.h1
               variants={fadeUp}
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="text-balance text-4xl font-semibold leading-[1.04] tracking-tight text-zinc-100 sm:text-5xl lg:text-7xl"
             >
               Akar Lokal. Standar Global. Membangun Ekosistem Digital Banyuwangi.
-            </motion.h1>
+            </m.h1>
 
-            <motion.p
+            <m.p
               variants={fadeUp}
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="mt-7 max-w-3xl text-lg leading-8 text-zinc-400"
@@ -83,14 +83,14 @@ export default function AboutPage() {
               ThreeDevs lahir dari sebuah keyakinan sederhana: Bahwa bisnis lokal
               dan UMKM berhak mendapatkan infrastruktur teknologi kelas
               enterprise tanpa kompromi.
-            </motion.p>
-          </motion.div>
+            </m.p>
+          </m.div>
         </div>
       </section>
 
       <section className="relative px-6 pb-24">
         <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[0.72fr_1.28fr]">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.35 }}
@@ -103,9 +103,9 @@ export default function AboutPage() {
             <h2 className="mt-4 text-3xl font-semibold tracking-tight text-zinc-100">
               Visi yang tumbuh dari kebutuhan nyata.
             </h2>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.35 }}
@@ -121,13 +121,13 @@ export default function AboutPage() {
               kami tulis dirancang untuk performa, keamanan, dan skalabilitas
               bisnis Anda.
             </p>
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
       <section className="relative border-t border-white/[0.06] px-6 py-24">
         <div className="mx-auto max-w-6xl">
-          <motion.div
+          <m.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.35 }}
@@ -142,9 +142,9 @@ export default function AboutPage() {
             <h2 className="text-3xl font-semibold tracking-tight text-zinc-100 sm:text-4xl">
               Tiga prinsip yang menjaga setiap project tetap tajam, kuat, dan siap digunakan.
             </h2>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.18 }}
@@ -158,7 +158,7 @@ export default function AboutPage() {
               const Icon = item.icon;
 
               return (
-                <motion.article
+                <m.article
                   key={item.title}
                   variants={fadeUp}
                   transition={{ duration: 0.45, ease: "easeOut" }}
@@ -176,17 +176,17 @@ export default function AboutPage() {
                   <p className="mt-5 text-sm leading-6 text-zinc-500">
                     {item.description}
                   </p>
-                </motion.article>
+                </m.article>
               );
             })}
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
       <TechStackBooster />
 
       <section className="relative px-6 pb-24">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.45 }}
@@ -208,7 +208,7 @@ export default function AboutPage() {
             Mulai Project
             <ArrowUpRight className="h-4 w-4" />
           </a>
-        </motion.div>
+        </m.div>
       </section>
 
       <Footer />

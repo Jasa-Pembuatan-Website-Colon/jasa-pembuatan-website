@@ -1,7 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Code2, Layers3, Rocket, Server, ShieldCheck, Sparkles } from "lucide-react";
+import { m } from "framer-motion";
+import {
+  Code2,
+  Layers3,
+  Rocket,
+  Server,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -43,7 +50,7 @@ export default function TechStackBooster() {
   return (
     <section className="relative border-t border-white/[0.06] px-6 py-24">
       <div className="mx-auto max-w-6xl">
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.35 }}
@@ -57,7 +64,8 @@ export default function TechStackBooster() {
               Tech Stack Booster
             </p>
             <h2 className="max-w-2xl text-3xl font-semibold tracking-tight text-zinc-100 sm:text-4xl">
-              Teknologi yang kami pilih untuk mempercepat bisnis, bukan sekadar mengikuti tren.
+              Teknologi yang kami pilih untuk mempercepat bisnis, bukan sekadar
+              mengikuti tren.
             </h2>
           </div>
           <p className="max-w-xl text-sm leading-6 text-zinc-500">
@@ -65,9 +73,9 @@ export default function TechStackBooster() {
             dan siap berkembang ketika traffic, transaksi, serta kebutuhan
             operasional bisnis ikut naik.
           </p>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.18 }}
@@ -81,7 +89,7 @@ export default function TechStackBooster() {
             const Icon = item.icon;
 
             return (
-              <motion.article
+              <m.article
                 key={item.name}
                 variants={fadeUp}
                 transition={{ duration: 0.45, ease: "easeOut" }}
@@ -99,12 +107,12 @@ export default function TechStackBooster() {
                 <p className="mt-4 text-sm leading-6 text-zinc-500">
                   {item.description}
                 </p>
-              </motion.article>
+              </m.article>
             );
           })}
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.45 }}
@@ -128,7 +136,7 @@ export default function TechStackBooster() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

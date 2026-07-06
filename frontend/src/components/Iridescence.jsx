@@ -1,7 +1,7 @@
-import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
-import { useEffect, useRef } from 'react';
+import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
+import { useEffect, useRef, useState } from "react";
 
-import './Iridescence.css';
+import "./Iridescence.css";
 
 const vertexShader = `
 attribute vec2 uv;
@@ -46,82 +46,163 @@ void main() {
 }
 `;
 
-export default function Iridescence({ color = [1, 1, 1], speed = 1.0, amplitude = 0.1, mouseReact = true, ...rest }) {
+export default function Iridescence({
+  color = [1, 1, 1],
+  speed = 1.0,
+  amplitude = 0.1,
+  mouseReact = true,
+  ...rest
+}) {
   const ctnDom = useRef(null);
   const mousePos = useRef({ x: 0.5, y: 0.5 });
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     if (!ctnDom.current) return;
     const ctn = ctnDom.current;
-    const renderer = new Renderer();
-    const gl = renderer.gl;
-    gl.clearColor(1, 1, 1, 1);
 
+    let renderer;
     let program;
-
-    function resize() {
-      const scale = 1;
-      renderer.setSize(ctn.offsetWidth * scale, ctn.offsetHeight * scale);
-      if (program) {
-        program.uniforms.uResolution.value = new Color(
-          gl.canvas.width,
-          gl.canvas.height,
-          gl.canvas.width / gl.canvas.height
-        );
-      }
-    }
-    window.addEventListener('resize', resize, false);
-    resize();
-
-    const geometry = new Triangle(gl);
-    program = new Program(gl, {
-      vertex: vertexShader,
-      fragment: fragmentShader,
-      uniforms: {
-        uTime: { value: 0 },
-        uColor: { value: new Color(...color) },
-        uResolution: {
-          value: new Color(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height)
-        },
-        uMouse: { value: new Float32Array([mousePos.current.x, mousePos.current.y]) },
-        uAmplitude: { value: amplitude },
-        uSpeed: { value: speed }
-      }
-    });
-
-    const mesh = new Mesh(gl, { geometry, program });
     let animateId;
+    let idleHandle;
 
-    function update(t) {
-      animateId = requestAnimationFrame(update);
-      program.uniforms.uTime.value = t * 0.001;
-      renderer.render({ scene: mesh });
-    }
-    animateId = requestAnimationFrame(update);
-    ctn.appendChild(gl.canvas);
+    function start() {
+      renderer = new Renderer();
+      const gl = renderer.gl;
+      gl.clearColor(1, 1, 1, 1);
 
-    function handleMouseMove(e) {
-      const rect = ctn.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = 1.0 - (e.clientY - rect.top) / rect.height;
-      mousePos.current = { x, y };
-      program.uniforms.uMouse.value[0] = x;
-      program.uniforms.uMouse.value[1] = y;
+      function resize() {
+        const scale = 1;
+        renderer.setSize(ctn.offsetWidth * scale, ctn.offsetHeight * scale);
+        if (program) {
+          program.uniforms.uResolution.value = new Color(
+            gl.canvas.width,
+            gl.canvas.height,
+            gl.canvas.width / gl.canvas.height,
+          );
+        }
+      }
+      window.addEventListener("resize", resize, false);
+      resize();
+
+      const geometry = new Triangle(gl);
+      program = new Program(gl, {
+        vertex: vertexShader,
+        fragment: fragmentShader,
+        uniforms: {
+          uTime: { value: 0 },
+          uColor: { value: new Color(...color) },
+          uResolution: {
+            value: new Color(
+              gl.canvas.width,
+              gl.canvas.height,
+              gl.canvas.width / gl.canvas.height,
+            ),
+          },
+          uMouse: {
+            value: new Float32Array([mousePos.current.x, mousePos.current.y]),
+          },
+          uAmplitude: { value: amplitude },
+          uSpeed: { value: speed },
+        },
+      });
+
+      const mesh = new Mesh(gl, { geometry, program });
+
+      function update(t) {
+        animateId = requestAnimationFrame(update);
+        program.uniforms.uTime.value = t * 0.001;
+        renderer.render({ scene: mesh });
+      }
+
+      // Prepare canvas but don't attach it immediately — this allows CSS fallback to show first
+      const canvas = renderer.gl && renderer.gl.canvas;
+      if (canvas) {
+        // Style the canvas to be absolute and cover the container, and hidden initially
+        canvas.style.position = "absolute";
+        canvas.style.left = "0";
+        canvas.style.top = "0";
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+        canvas.style.inset = "0";
+        canvas.style.opacity = "0";
+        canvas.style.transition = "opacity 400ms ease";
+        canvas.style.pointerEvents = "none";
+        canvas.style.zIndex = "0";
+
+        ctn.appendChild(canvas);
+
+        // Start render loop after canvas is in DOM
+        animateId = requestAnimationFrame(update);
+
+        // Fade-in when first frame is ready
+        // Use a microtask to ensure initial paint of CSS background happened
+        requestAnimationFrame(() => {
+          // small timeout to avoid Jank
+          setTimeout(() => {
+            canvas.style.opacity = "1";
+            setIsLoaded(true);
+          }, 50);
+        });
+      }
+
+      function handleMouseMove(e) {
+        const rect = ctn.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = 1.0 - (e.clientY - rect.top) / rect.height;
+        mousePos.current = { x, y };
+        if (program) {
+          program.uniforms.uMouse.value[0] = x;
+          program.uniforms.uMouse.value[1] = y;
+        }
+      }
+      if (mouseReact) {
+        ctn.addEventListener("mousemove", handleMouseMove);
+      }
+
+      // Cleanup function
+      const cleanup = () => {
+        cancelAnimationFrame(animateId);
+        window.removeEventListener("resize", resize);
+        if (mouseReact) {
+          ctn.removeEventListener("mousemove", handleMouseMove);
+        }
+        if (
+          renderer &&
+          renderer.gl &&
+          renderer.gl.canvas &&
+          renderer.gl.canvas.parentNode === ctn
+        ) {
+          ctn.removeChild(renderer.gl.canvas);
+          renderer.gl.getExtension("WEBGL_lose_context")?.loseContext();
+        }
+      };
+
+      return cleanup;
     }
-    if (mouseReact) {
-      ctn.addEventListener('mousemove', handleMouseMove);
+
+    // Schedule start on idle to avoid blocking LCP; fallback to timeout
+    if ("requestIdleCallback" in window) {
+      idleHandle = requestIdleCallback(start, { timeout: 1000 });
+    } else {
+      idleHandle = setTimeout(start, 200);
     }
 
     return () => {
-      cancelAnimationFrame(animateId);
-      window.removeEventListener('resize', resize);
-      if (mouseReact) {
-        ctn.removeEventListener('mousemove', handleMouseMove);
+      if ("cancelIdleCallback" in window && idleHandle) {
+        cancelIdleCallback(idleHandle);
+      } else if (idleHandle) {
+        clearTimeout(idleHandle);
       }
-      ctn.removeChild(gl.canvas);
-      gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
   }, [color, speed, amplitude, mouseReact]);
 
-  return <div ref={ctnDom} className="iridescence-container" {...rest} />;
+  return (
+    <div
+      ref={ctnDom}
+      className="iridescence-container"
+      {...rest}
+      data-loaded={isLoaded}
+    />
+  );
 }

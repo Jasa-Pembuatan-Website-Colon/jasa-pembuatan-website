@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { NAV_LINKS } from "@/lib/constants";
 
@@ -50,7 +50,7 @@ export default function Navbar() {
 
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
+          <m.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -76,7 +76,7 @@ export default function Navbar() {
                 Mulai Sekarang
               </a>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </header>

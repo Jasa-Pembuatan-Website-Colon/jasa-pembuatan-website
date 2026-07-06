@@ -1,5 +1,9 @@
 import "./globals.css";
 import BackendProvider from "@/components/providers/BackendProvider";
+import { LazyMotion, domAnimation } from "framer-motion";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata = {
   title: "ThreeDevs — Wujudkan Website Impian Anda",
@@ -13,9 +17,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="id" className="h-full antialiased">
-      <body className="min-h-full bg-zinc-950 text-zinc-100 font-sans">
+      <body
+        className={`${inter.className} min-h-full bg-zinc-950 text-zinc-100 font-sans`}
+      >
         <BackendProvider>
-          {children}
+          <LazyMotion features={domAnimation} strict>
+            {children}
+          </LazyMotion>
         </BackendProvider>
       </body>
     </html>

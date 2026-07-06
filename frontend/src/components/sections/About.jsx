@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ArrowUpRight, Crosshair, Gem, Layers3, ShieldCheck, Sparkles } from "lucide-react";
 import { LampContainer } from "@/components/ui/lamp";
 
@@ -37,7 +37,7 @@ export function AboutLampSection() {
   return (
     <section className="relative border-t border-white/[0.06]">
       <LampContainer className="min-h-[42rem] rounded-none">
-        <motion.div
+        <m.div
           initial={{ opacity: 0.45, y: 72 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
@@ -51,7 +51,7 @@ export function AboutLampSection() {
           <h2 className="bg-gradient-to-br from-zinc-100 via-zinc-300 to-zinc-600 bg-clip-text text-4xl font-semibold tracking-tight text-transparent sm:text-5xl lg:text-6xl">
             Akar Lokal. Standar Global.
           </h2>
-        </motion.div>
+        </m.div>
       </LampContainer>
     </section>
   );
@@ -65,7 +65,7 @@ export default function AboutSection() {
       </div>
 
       <div className="relative mx-auto max-w-6xl">
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.35 }}
@@ -75,22 +75,22 @@ export default function AboutSection() {
           }}
           className="mb-14 max-w-5xl"
         >
-          <motion.p
+          <m.p
             variants={fadeUp}
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="mb-5 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-cyan-300/80"
           >
             <Gem className="h-3.5 w-3.5" />
             Our Story
-          </motion.p>
-          <motion.h2
+          </m.p>
+          <m.h2
             variants={fadeUp}
             transition={{ duration: 0.55, ease: "easeOut" }}
             className="text-balance text-3xl font-semibold leading-tight tracking-tight text-zinc-100 sm:text-4xl lg:text-5xl"
           >
             Akar Lokal. Standar Global. Membangun Ekosistem Digital Banyuwangi.
-          </motion.h2>
-          <motion.p
+          </m.h2>
+          <m.p
             variants={fadeUp}
             transition={{ duration: 0.55, ease: "easeOut" }}
             className="mt-6 max-w-3xl text-base leading-7 text-zinc-400 sm:text-lg"
@@ -98,11 +98,11 @@ export default function AboutSection() {
             ThreeDevs lahir dari sebuah keyakinan sederhana: Bahwa bisnis lokal
             dan UMKM berhak mendapatkan infrastruktur teknologi kelas enterprise
             tanpa kompromi.
-          </motion.p>
-        </motion.div>
+          </m.p>
+        </m.div>
 
         <div className="grid gap-6 lg:grid-cols-[0.78fr_1.22fr]">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.35 }}
@@ -122,9 +122,9 @@ export default function AboutSection() {
               Baca versi lengkap
               <ArrowUpRight className="h-4 w-4" />
             </a>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.35 }}
@@ -140,10 +140,10 @@ export default function AboutSection() {
               kami tulis dirancang untuk performa, keamanan, dan skalabilitas
               bisnis Anda.
             </p>
-          </motion.div>
+          </m.div>
         </div>
 
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.18 }}
@@ -157,7 +157,7 @@ export default function AboutSection() {
             const Icon = item.icon;
 
             return (
-              <motion.article
+              <m.article
                 key={item.title}
                 variants={fadeUp}
                 transition={{ duration: 0.45, ease: "easeOut" }}
@@ -175,10 +175,10 @@ export default function AboutSection() {
                 <p className="mt-4 text-sm leading-6 text-zinc-500">
                   {item.description}
                 </p>
-              </motion.article>
+              </m.article>
             );
           })}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

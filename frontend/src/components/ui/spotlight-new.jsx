@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 /**
@@ -13,14 +13,14 @@ import { cn } from "@/lib/utils";
  */
 export const Spotlight = ({ className, fill = "white" }) => {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 2 }}
       className={cn("pointer-events-none absolute inset-0 h-full w-full", className)}
     >
       {/* ====== BEAM KIRI — sorotan dari kiri atas ====== */}
-      <motion.div
+      <m.div
         animate={{ x: [0, 80, 0] }}
         transition={{
           duration: 8,
@@ -66,10 +66,10 @@ export const Spotlight = ({ className, fill = "white" }) => {
           }}
           className="absolute top-0 left-0 origin-top-left"
         />
-      </motion.div>
+      </m.div>
 
       {/* ====== BEAM KANAN — bergerak berlawanan arah ====== */}
-      <motion.div
+      <m.div
         animate={{ rotateX: [0, 50, 0] }}
         transition={{
           duration: 8,
@@ -112,7 +112,7 @@ export const Spotlight = ({ className, fill = "white" }) => {
           }}
           className="absolute top-0 right-0 origin-top-right"
         />
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   );
 };

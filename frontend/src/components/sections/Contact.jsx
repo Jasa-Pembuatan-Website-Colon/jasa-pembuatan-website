@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Send, Mail, Phone, MapPin } from "lucide-react";
 import { fadeUp, stagger } from "@/lib/constants";
 
@@ -8,7 +8,7 @@ export default function ContactSection() {
   return (
     <section id="contact" className="border-t border-white/[0.06] px-6 py-28">
       <div className="mx-auto max-w-6xl">
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -24,23 +24,25 @@ export default function ContactSection() {
           <p className="mt-4 text-zinc-500">
             Ceritakan ide Anda. Tim kami akan menghubungi dalam 1x24 jam.
           </p>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
           variants={stagger}
           className="grid grid-cols-1 gap-10 lg:grid-cols-5"
         >
-          <motion.form
+          <m.form
             variants={fadeUp}
             onSubmit={(e) => e.preventDefault()}
             className="space-y-6 rounded-lg border border-white/[0.08] bg-white/[0.025] p-6 lg:col-span-3"
           >
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
-                <label className="mb-1.5 block text-xs text-zinc-500">Nama</label>
+                <label className="mb-1.5 block text-xs text-zinc-500">
+                  Nama
+                </label>
                 <input
                   type="text"
                   placeholder="Nama lengkap"
@@ -48,7 +50,9 @@ export default function ContactSection() {
                 />
               </div>
               <div>
-                <label className="mb-1.5 block text-xs text-zinc-500">Email</label>
+                <label className="mb-1.5 block text-xs text-zinc-500">
+                  Email
+                </label>
                 <input
                   type="email"
                   placeholder="email@domain.com"
@@ -58,7 +62,9 @@ export default function ContactSection() {
             </div>
 
             <div>
-              <label className="mb-1.5 block text-xs text-zinc-500">Paket</label>
+              <label className="mb-1.5 block text-xs text-zinc-500">
+                Paket
+              </label>
               <select className="w-full rounded-lg border border-white/10 bg-zinc-950/40 px-4 py-3 text-sm text-zinc-400 outline-none transition-all focus:border-cyan-300/50 focus:ring-1 focus:ring-cyan-300/20">
                 <option value="">Pilih paket</option>
                 <option value="basic">Basic — 1.5 Juta</option>
@@ -68,7 +74,9 @@ export default function ContactSection() {
             </div>
 
             <div>
-              <label className="mb-1.5 block text-xs text-zinc-500">Pesan</label>
+              <label className="mb-1.5 block text-xs text-zinc-500">
+                Pesan
+              </label>
               <textarea
                 rows={5}
                 placeholder="Ceritakan tentang proyek Anda..."
@@ -83,9 +91,9 @@ export default function ContactSection() {
               <Send className="h-4 w-4" />
               Kirim Pesan
             </button>
-          </motion.form>
+          </m.form>
 
-          <motion.div variants={fadeUp} className="space-y-4 lg:col-span-2">
+          <m.div variants={fadeUp} className="space-y-4 lg:col-span-2">
             <ContactItem
               icon={<Mail className="h-4 w-4" />}
               label="Email"
@@ -101,8 +109,8 @@ export default function ContactSection() {
               label="Lokasi"
               value="Banyuwangi, Indonesia"
             />
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       </div>
     </section>
   );

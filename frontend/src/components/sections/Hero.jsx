@@ -1,9 +1,10 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Safari } from "@/components/ui/safari";
+import Image from "next/image";
 
 const Iridescence = dynamic(() => import("@/components/Iridescence"), {
   ssr: false,
@@ -40,12 +41,23 @@ export default function HeroSection() {
       className="relative flex min-h-screen items-center overflow-hidden px-6 pb-16 pt-24"
     >
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <Iridescence
-          color={[0.55, 0.62, 0.95]}
-          speed={0.65}
-          amplitude={0.12}
-          mouseReact={false}
-        />
+        {/* CSS gradient fallback: renders instantly for LCP while Iridescence (WebGL) loads */}
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(135deg, rgba(71,130,255,0.12) 0%, rgba(124,58,237,0.09) 60%, rgba(16,24,40,0.04) 100%)",
+          }}
+        >
+          <Iridescence
+            color={[0.55, 0.62, 0.95]}
+            speed={0.65}
+            amplitude={0.12}
+            mouseReact={false}
+            className="absolute inset-0"
+          />
+        </div>
       </div>
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(34,211,238,0.12),transparent_30%),radial-gradient(circle_at_82%_18%,rgba(124,58,237,0.12),transparent_26%),linear-gradient(to_bottom,rgba(9,9,11,0.15),#09090b_92%)]" />
@@ -53,25 +65,20 @@ export default function HeroSection() {
       <div className="relative z-10 mx-auto w-full max-w-6xl">
         <div className="grid items-center gap-14 lg:grid-cols-[1.08fr_0.92fr]">
           <div>
-            <motion.p
+            <m.p
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.5 }}
               className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-zinc-400"
             >
               IT Agency Banyuwangi
-            </motion.p>
+            </m.p>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25, duration: 0.6 }}
-              className="max-w-4xl text-balance text-4xl font-semibold leading-[1.04] tracking-tight text-zinc-100 sm:text-5xl lg:text-7xl"
-            >
+            <h1 className="max-w-4xl text-balance text-4xl font-semibold leading-[1.04] tracking-tight text-zinc-100 sm:text-5xl lg:text-7xl">
               Website profesional untuk bisnis yang siap tumbuh.
-            </motion.h1>
+            </h1>
 
-            <motion.p
+            <m.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
@@ -80,9 +87,9 @@ export default function HeroSection() {
               Kami merancang landing page, company profile, web app, dan
               e-commerce dengan tampilan matang, performa cepat, serta alur
               konversi yang jelas.
-            </motion.p>
+            </m.p>
 
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.55, duration: 0.6 }}
@@ -100,21 +107,23 @@ export default function HeroSection() {
               >
                 Lihat Showcase
               </a>
-            </motion.div>
+            </m.div>
 
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.6 }}
               className="mt-10 grid max-w-xl grid-cols-1 gap-3 text-sm text-zinc-500 sm:grid-cols-3"
             >
-              {["Desain responsif", "SEO-ready", "Support handover"].map((item) => (
-                <div key={item} className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-cyan-300" />
-                  <span>{item}</span>
-                </div>
-              ))}
-            </motion.div>
+              {["Desain responsif", "SEO-ready", "Support handover"].map(
+                (item) => (
+                  <div key={item} className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-cyan-300" />
+                    <span>{item}</span>
+                  </div>
+                ),
+              )}
+            </m.div>
           </div>
 
           <div className="relative hidden min-h-[30rem] items-center justify-center md:flex">
@@ -133,7 +142,7 @@ function TechStackMarquee() {
   const marqueeItems = [...TECH_STACK, ...TECH_STACK, ...TECH_STACK];
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.85, duration: 0.55 }}
@@ -158,12 +167,14 @@ function TechStackMarquee() {
               className="flex min-w-[15rem] items-center gap-3 rounded-lg border border-white/[0.08] bg-white/[0.035] px-4 py-3 backdrop-blur"
             >
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-zinc-950/80">
-                <img
+                <Image
                   src={item.logo}
                   alt={`${item.name} logo`}
+                  width={24}
+                  height={24}
                   className="h-6 w-6 object-contain"
                   loading="lazy"
-                  decoding="async"
+                  unoptimized
                 />
               </span>
               <span>
@@ -178,14 +189,14 @@ function TechStackMarquee() {
           ))}
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
 function BrowserPreview() {
   return (
     <div className="relative w-full max-w-[34rem] px-4">
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 24, rotateX: 8 }}
         animate={{ opacity: 1, y: 0, rotateX: 0 }}
         transition={{ delay: 0.45, duration: 0.7, ease: "easeOut" }}
@@ -194,9 +205,10 @@ function BrowserPreview() {
         <Safari
           url="threedevs.web.id"
           imageSrc="/threedevs.png"
+          priority={true}
           className="drop-shadow-[0_28px_80px_rgba(0,0,0,0.45)]"
         />
-      </motion.div>
+      </m.div>
 
       <div className="absolute -bottom-8 left-0 right-0 z-20 mx-auto grid max-w-[28rem] grid-cols-3 gap-3">
         {[

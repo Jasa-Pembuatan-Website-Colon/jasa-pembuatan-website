@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import {
   ArrowUpRight,
   BadgeCheck,
@@ -88,7 +88,7 @@ export default function TeamSection() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-6xl">
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -171,9 +171,9 @@ export default function TeamSection() {
               <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.08 }}
@@ -183,7 +183,7 @@ export default function TeamSection() {
           {TEAM_LAYOUT.map((item, index) => (
             <MemberCard key={item.member.name} index={index} {...item} />
           ))}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );
@@ -214,7 +214,7 @@ function MemberCard({
 }) {
   const Icon = member.icon;
   return (
-    <motion.div
+    <m.div
       variants={fadeUp}
       className={`group relative z-10 overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.025] shadow-2xl shadow-black/25 transition-all duration-300 hover:-translate-y-1 hover:border-white/[0.16] ${cardHeight} ${className}`}
     >
@@ -257,6 +257,6 @@ function MemberCard({
           </p>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
